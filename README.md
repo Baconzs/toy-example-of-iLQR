@@ -10,6 +10,27 @@ This repository implements an **C**onstrained **I**terative **L**inear **Q**uadr
 - Tested on WSL2 Ubuntu 20.04🐧
 - Python >= 3.6.10, matplotlib, numpy
 - Other dependencies: [fmt](https://github.com/fmtlib/fmt), [yamp-cpp](https://github.com/jbeder/yaml-cpp)
+- Install yaml:
+  Reference: https://zhuanlan.zhihu.com/p/626825665, clone repo and make in host
+  Modify CMakeList.list:
+    find_package(fmt REQUIRED)
+    find_package(spdlog REQUIRED)
+    find_package(yaml-cpp REQUIRED) //cannot find yaml-cpp, so must indicate the include_directiories and target_link_libraries
+    
+    include_directories("/usr/include/eigen3")
+    include_directories(${CMAKE_CURRENT_LIST_DIR})
+    include_directories(${PROJECT_SOURCE_DIR}/include)
+    include_directories(${PROJECT_SOURCE_DIR}/3rdparty)
+    
+    set(YAML_CPP_INCLUDE_DIRS /usr/local/include)
+    include_directories(${YAML_CPP_INCLUDE_DIRS})
+    
+    file(GLOB SOURCE_FILES "${PROJECT_SOURCE_DIR}/src/*.cpp")
+    set(3RDPARTY matplotlib_cpp fmt::fmt spdlog::spdlog /usr/local/lib/libyaml-cpp.so.0.8.0)
+    
+    add_executable(motion_planning ${SOURCE_FILES})
+    target_link_libraries(motion_planning ${3RDPARTY})
+
 
 ## 2. Build
 
@@ -65,5 +86,6 @@ In addition, you can manually modify the contents of the configuration file, inc
 ```
 
 <div align=center>
+
   <img src="./images/scenario_three_straight.gif" width="520"/>
 </div>
