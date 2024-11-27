@@ -12,7 +12,7 @@ This repository implements an **C**onstrained **I**terative **L**inear **Q**uadr
 - Other dependencies: [fmt](https://github.com/fmtlib/fmt), [yamp-cpp](https://github.com/jbeder/yaml-cpp)
 - Install yaml:
   Reference: https://zhuanlan.zhihu.com/p/626825665, clone repo and make in host
-  Modify CMakeList.list:
+  Modify CMakeLists.txt:
     find_package(fmt REQUIRED)
     find_package(spdlog REQUIRED)
     find_package(yaml-cpp REQUIRED) //cannot find yaml-cpp, so must indicate the include_directiories and target_link_libraries
